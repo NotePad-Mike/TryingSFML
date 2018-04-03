@@ -29,7 +29,7 @@ int main()
 	initShape(targetRect, sf::Vector2f(400, 50));
 	sf::RectangleShape badRect(sf::Vector2f(50, 100));
 	badRect.setTexture(&enemyT);
-	initShape(badRect, sf::Vector2f(250, 50));
+	initShape(badRect, sf::Vector2f(250, 90));
 
 
 	while (window.isOpen())
@@ -41,19 +41,21 @@ int main()
 				window.close();
 		}
 		//Update frame
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Right))
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Right) || sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
 			playerRect.move(1, 0);
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Left))
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Left) || sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A))
 			playerRect.move(-1, 0);
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Down))
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Down) || sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S))
 			playerRect.move(0 ,1);
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Up))
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Up) || sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W))
 			playerRect.move(0, -1);
 
 		if (playerRect.getGlobalBounds().intersects(targetRect.getGlobalBounds()))
 			window.close();
 		if (playerRect.getGlobalBounds().intersects(badRect.getGlobalBounds()))
 			playerRect.setPosition(startPos);
+
+		badRect.rotate(1.5f);
 
 		//Render the object
 		window.clear();
